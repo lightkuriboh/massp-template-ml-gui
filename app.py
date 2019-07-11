@@ -1,6 +1,9 @@
 
 from flask import Flask, request, render_template, url_for, redirect, send_from_directory
 import os
+
+from mpl_toolkits.axes_grid1 import host_axes
+
 import config
 import time
 import cv2
@@ -30,7 +33,7 @@ def handle_file_upload():
             photo.save(os.path.join(config.img_dir, new_name))
             # time.sleep(1)
             de_haze(new_name) # solve problem
-            # time.sleep(1)
+            time.sleep(1)
     return redirect(url_for('img_show', filename=new_name))
 
 
@@ -40,4 +43,4 @@ def de_haze(new_name):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
